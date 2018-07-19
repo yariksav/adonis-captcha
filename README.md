@@ -10,6 +10,8 @@ Install the package from npm
 adonis install adonis-captcha
 ```
 
+Then register provider in start/app.js:
+
 ```javascript
 const providers = [
   ...
@@ -54,7 +56,7 @@ test('try to register new user', async ({ assert, client}) => {
 })
 ```
 
-## Use directle
+## Use directly
 ```js
 const Captcha = use('Capptcha')
 await Captcha.validate(request.input('recaptcha-token'))

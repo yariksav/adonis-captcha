@@ -16,19 +16,48 @@ const providers = [
 ]
 ```
 
-That's all! Now you can use the sms provider as follows.
+## Usage as middleware
+
+Add row in start/kernel.js
+```js
+const namedMiddleware = {
+  ...
+  recaptcha: 'Adonis/Middleware/Captcha',
+}
+```
+Then in your route
 
 ```js
-
+  Route.post('account/register', 'AccountController.register').middleware(['recaptcha'])
 ```
 
-The `verify` is the view name stored inside the `resources/views/sms` directory.
+## Use in tests
 
+```js
+const Captcha = use('Capptcha')
 
-## Activator module
+...
 
-## Configuration and Environment variables
+test('try to register new user', async ({ assert, client}) => {
+  Captcha.fake()
+  const user = await User.create(newUser)
 
-The configuration file is saved as `config/smser.js`, feel free to tweak it according.
+  const response = await client.post('account/register')
+    .send({
+      username: 'test'
+    })
+    .end()
 
-Also make sure to define sensitive driver details inside the `.env` file and reference them via `Env` provider.
+  response.assertStatus(200)
+
+  Captcha.restore()
+})
+```
+
+## Use directly
+```js
+const Captcha = use('Capptcha')
+await Captcha.validate(request.input('recaptcha-token'))
+```
+
+validate will throw Error when recaphca is incorrect

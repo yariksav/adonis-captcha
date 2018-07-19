@@ -43,7 +43,7 @@ class CaptchaProvider extends ServiceProvider {
   _registerCaptchaMiddleware () {
     this.app.bind('Adonis/Middleware/Captcha', (app) => {
       const CaptchaMiddleware = require('../src/Middleware')
-      return new CaptchaMiddlewares(app.use('Adonis/Src/Config'), app.use('Adonis/Addons/Captcha'))
+      return new CaptchaMiddleware(app.use('Adonis/Src/Config'), app.use('Adonis/Addons/Captcha'))
     })
   }
   /**

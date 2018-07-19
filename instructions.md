@@ -56,7 +56,7 @@ test('try to register new user', async ({ assert, client}) => {
 
 ## Use directly
 ```js
-const Captcha = use('Capptcha')
+const Captcha = use('Captcha')
 await Captcha.validate(request.input('recaptcha-token'))
 ```
 

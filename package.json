@@ -1,6 +1,6 @@
 {
   "name": "adonis-captcha",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Captcha provider for adonisjs framework",
   "main": "index.js",
   "directories": {
